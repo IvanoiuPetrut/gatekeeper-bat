@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>It's Time to Stop · Settings</title>
+  <link rel="icon" href="../icons/icon32.png">
+  <link rel="stylesheet" href="../lib/styles.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="options">
+    <header class="page-header">
+      <img src="../icons/icon48.png" alt="" width="40" height="40">
+      <div>
+        <h1>It's Time to Stop</h1>
+        <p class="muted">Solve a puzzle before a guarded website opens. Once you're in, it stays open for a while.</p>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="sites-title">
+      <div class="section-head">
+        <h2 id="sites-title">Guarded websites</h2>
+        <span id="count" class="muted small"></span>
+      </div>
+
+      <div class="grid grid-head" aria-hidden="true">
+        <span>Website</span>
+        <span>Game</span>
+        <span>Difficulty</span>
+        <span>Minutes</span>
+        <span></span>
+      </div>
+
+      <form id="add-form" class="grid add-row" novalidate>
+        <input id="add-domain" type="text" placeholder="Add a website, e.g. youtube.com"
+               autocomplete="off" spellcheck="false" aria-label="Website" aria-describedby="add-error">
+        <select id="add-game" aria-label="Game"></select>
+        <select id="add-difficulty" aria-label="Difficulty"></select>
+        <input id="add-minutes" type="number" min="1" max="1440" aria-label="Minutes" inputmode="numeric">
+        <button type="submit" class="primary">Add</button>
+      </form>
+      <p id="add-error" class="field-error small" aria-live="polite"></p>
+
+      <div id="sites" class="site-list"></div>
+
+      <p class="muted small footnote">
+        Subdomains are included, so <code>youtube.com</code> also covers <code>m.youtube.com</code>.
+        Leave minutes blank to use the default.
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="general-title">
+      <h2 id="general-title">General</h2>
+      <div class="setting-row">
+        <label for="default-minutes">
+          <span>Default unlock time</span>
+          <span class="muted small">For websites that don't set their own minutes.</span>
+        </label>
+        <div class="suffix-input">
+          <input id="default-minutes" type="number" min="1" max="1440" inputmode="numeric">
+          <span class="muted">min</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden>
+    <span id="toast-text"></span>
+    <button id="toast-undo" class="link">Undo</button>
+  </div>
+
+  <script src="../lib/common.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "It's Time to Stop",
+  "version": "1.0.0",
+  "description": "Guard distracting websites behind a puzzle. Solve it to get in for a while.",
+  "permissions": ["storage", "tabs", "webNavigation", "alarms"],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["lib/common.js", "background.js"]
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "its-time-to-stop@petrut",
+      "strict_min_version": "121.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  }
+}
