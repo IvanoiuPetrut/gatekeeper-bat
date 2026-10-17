@@ -1,8 +1,8 @@
 .gate {
   /* Bat hangs in the sky to the right of the board column. */
   --bat-inset: 470px;
-  /* Everything on the page that isn't the board; the board takes what's left of the
-     window height (see --board in sudoku.css), so the page fits without scrolling. */
+  /* Height of everything on the page that isn't the board. gate.js measures it live;
+     the board takes what's left of the window (see --board in sudoku.css). */
   --board-chrome: 420px;
   max-width: 680px;
   margin: 0 auto;

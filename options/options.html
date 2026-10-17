@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>It's Time to Stop · Settings</title>
   <link rel="icon" href="../icons/icon32.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Yarndings+12&display=block">
+  <link rel="stylesheet" href="../lib/fonts/fonts.css">
   <link rel="stylesheet" href="../lib/styles.css">
+  <script src="../lib/font.js"></script>
   <link rel="stylesheet" href="options.css">
 </head>
 <body class="has-bat">
@@ -35,7 +34,7 @@
       </div>
 
       <form id="add-form" class="grid add-row" novalidate>
-        <input id="add-domain" type="text" placeholder="Add a website, e.g. youtube.com"
+        <input id="add-domain" type="text" placeholder="e.g. youtube.com"
                autocomplete="off" spellcheck="false" aria-label="Website" aria-describedby="add-error">
         <select id="add-game" aria-label="Game"></select>
         <select id="add-difficulty" aria-label="Difficulty"></select>
@@ -62,6 +61,16 @@
         <div class="suffix-input">
           <input id="default-minutes" type="number" min="1" max="1440" inputmode="numeric">
           <span class="muted">min</span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span id="font-label" class="setting-label">
+          <span>Font</span>
+          <span class="muted small">Pixel style, or a plain font that's easier to read.</span>
+        </span>
+        <div class="segmented" role="radiogroup" aria-labelledby="font-label">
+          <button type="button" role="radio" data-font="pixel" aria-checked="true">Pixel</button>
+          <button type="button" role="radio" data-font="plain" aria-checked="false">Plain</button>
         </div>
       </div>
     </section>

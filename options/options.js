@@ -105,6 +105,9 @@ function buildRow(site, settings, unlocks) {
 
 async function render() {
   const { sites, settings, unlocks } = await PG.getState();
+  for (const b of document.querySelectorAll(".segmented [data-font]")) {
+    b.setAttribute("aria-checked", String(b.dataset.font === settings.font));
+  }
   if (document.activeElement !== $("default-minutes")) $("default-minutes").value = settings.defaultMinutes;
   $("add-minutes").placeholder = settings.defaultMinutes;
   $("count").textContent = sites.length ? `${sites.length} website${sites.length === 1 ? "" : "s"}` : "";
@@ -160,6 +163,13 @@ $("default-minutes").addEventListener("change", async (e) => {
   if (n > 0) await chrome.storage.local.set({ settings: { ...settings, defaultMinutes: Math.min(n, 1440) } });
   else e.target.value = settings.defaultMinutes;
 });
+
+for (const b of document.querySelectorAll(".segmented [data-font]")) {
+  b.addEventListener("click", async () => {
+    const { settings } = await PG.getState();
+    await chrome.storage.local.set({ settings: { ...settings, font: b.dataset.font } });
+  });
+}
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && (changes.sites || changes.settings || changes.unlocks)) render();

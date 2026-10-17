@@ -26,6 +26,9 @@
 
 /* Board: ink field, plum grid, peach frame, dithered plum shadow. */
 .sudoku-board {
+  /* Faded solids for in-board highlights; dithering here was too busy behind the digits. */
+  --peer: color-mix(in srgb, var(--plum) 45%, var(--ink));
+  --clash: color-mix(in srgb, var(--ember) 38%, var(--ink));
   position: relative;
   display: grid;
   /* minmax(0, …) lets rows shrink below the digit's line box; digits scale with the board via cqi. */
@@ -71,12 +74,12 @@
 .sudoku-cell:nth-child(n + 73) { border-bottom: none; }
 
 .sudoku-cell.given { color: var(--peach); font-weight: 700; }
-/* Row/column/box of the selection: a light plum dither, so it reads as "related", not "chosen". */
-.sudoku-cell.peer { background: var(--dither-plum-25) 0 0 / 4px 4px; }
+/* Row/column/box of the selection: a faded plum, so it reads as "related", not "chosen". */
+.sudoku-cell.peer { background: var(--peer); }
 .sudoku-cell.same { background: var(--plum); }
 .sudoku-cell.selected { background: var(--plum); box-shadow: inset 0 0 0 3px var(--ember); }
-/* Clashing digits get an ember dither behind them. */
-.sudoku-cell.conflict { background: var(--dither-ember-50) 0 0 / 4px 4px; color: var(--peach); }
+/* Clashing digits get a faded ember behind them. */
+.sudoku-cell.conflict { background: var(--clash); color: var(--peach); }
 .sudoku-cell.conflict.given { text-decoration: underline 2px var(--ember); text-underline-offset: 4px; }
 /* Wrong after Check: solid ember, ink digit. */
 .sudoku-cell.wrong { background: var(--ember); color: var(--ink); }
@@ -97,15 +100,15 @@
 
 /* On solve, an ember wave sweeps diagonally across the board. --d is set per cell. */
 .sudoku-board.solved .sudoku-cell {
-  /* steps(1) per keyframe: hard cuts between dither frames, never blended (off-palette) colours. */
+  /* steps(1) per keyframe: hard cuts between frames, like a sprite. */
   animation: cell-wave 560ms steps(1, end) both;
   animation-delay: var(--d);
 }
 @keyframes cell-wave {
   0% { background: transparent; }
-  25% { background: var(--dither-ember-50) 0 0 / 4px 4px; }
+  25% { background: var(--clash); }
   50% { background: var(--ember); color: var(--ink); }
-  75% { background: var(--dither-ember-50) 0 0 / 4px 4px; }
+  75% { background: var(--clash); }
 }
 
 .sudoku-notes {
@@ -132,8 +135,15 @@
   padding: 0 0 4px;
   font-size: 22px;
 }
-/* All nine placed: the key is dithered out. */
-.sudoku-pad button.done { background-image: var(--dither-ink-50); background-size: 4px 4px; }
+/* All nine placed, or unavailable: the key fades instead of dithering. */
+.sudoku-pad button.done,
+.sudoku-tools button:disabled {
+  background-image: none;
+  background-color: color-mix(in srgb, var(--peach) 28%, var(--ink));
+  color: var(--peach);
+  box-shadow: none;
+}
+.sudoku-tools button:disabled { background-color: color-mix(in srgb, var(--plum) 45%, var(--ink)); color: var(--muted); }
 
 .sudoku-tools {
   display: grid;
