@@ -5,14 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>It's Time to Stop</title>
   <link rel="icon" href="../icons/icon32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Yarndings+12&display=block">
   <link rel="stylesheet" href="../lib/styles.css">
   <link rel="stylesheet" href="../games/sudoku/sudoku.css">
   <link rel="stylesheet" href="gate.css">
 </head>
-<body>
+<body class="has-bat">
   <main class="gate">
-    <header class="gate-header">
-      <p class="gate-eyebrow">It's Time to Stop</p>
+    <header class="gate-header on-sky">
+      <p class="gate-eyebrow">
+        <span class="orn sm" aria-hidden="true">k</span>
+        It's Time to Stop
+        <span class="orn sm" aria-hidden="true">k</span>
+      </p>
       <h1>Is <span id="domain">this site</span> worth a puzzle?</h1>
       <p class="muted" id="subtitle">Solve it to get in.</p>
     </header>
@@ -20,14 +27,13 @@
     <section id="game" class="gate-game"></section>
 
     <section id="message" class="card gate-message" hidden></section>
+
+    <p class="garden orn" aria-hidden="true">fgbgfdfgbgf</p>
   </main>
 
   <div id="solved" class="gate-overlay" hidden>
     <div class="card gate-solved" role="dialog" aria-modal="true" aria-labelledby="solved-title">
-      <div class="check-mark" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 26 26"><path d="M6 13.5l4.5 4.5L20 8.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <h2 id="solved-title">Solved</h2>
+      <h2 id="solved-title">Solved!</h2>
       <p id="solved-text" class="muted"></p>
       <button id="continue" class="primary">Continue</button>
     </div>

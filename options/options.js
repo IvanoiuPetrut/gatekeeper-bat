@@ -111,7 +111,10 @@ async function render() {
 
   const list = $("sites");
   if (!sites.length) {
-    list.innerHTML = `<p class="empty muted">Nothing guarded yet. Add a website above to get started.</p>`;
+    list.innerHTML = `<div class="empty">
+      <p class="orn lg" aria-hidden="true">fgf</p>
+      <p class="muted">Nothing guarded yet. Add a website above to get started.</p>
+    </div>`;
     return;
   }
   list.replaceChildren(...sites.map((site) => buildRow(site, settings, unlocks)));

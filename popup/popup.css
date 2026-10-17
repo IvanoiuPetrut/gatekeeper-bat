@@ -1,4 +1,5 @@
-body { width: 300px; }
+/* The popup is one plum card; ink inputs and dithered rules sit on it. */
+body { width: 300px; min-height: 0; background: var(--plum); }
 
 .popup {
   padding: 14px 16px;
@@ -12,7 +13,7 @@ body { width: 300px; }
   align-items: center;
   gap: 8px;
 }
-.popup h1 { font-size: 15px; }
+.popup h1 { font-size: 18px; }
 
 .popup .domain {
   font-weight: 600;
@@ -31,15 +32,16 @@ body { width: 300px; }
 }
 
 .popup .remaining {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
+  color: var(--ember);
   font-variant-numeric: tabular-nums;
 }
 
 .popup select { flex: 1; }
 
 .popup footer {
-  border-top: 1px solid var(--border);
-  padding-top: 10px;
+  padding-top: 14px;
+  background: var(--dither-ink-50) 0 0 / 4px 4px repeat-x;
   font-size: 14px;
 }

@@ -1,7 +1,7 @@
 .options {
   max-width: 840px;
   margin: 0 auto;
-  padding: 48px 20px 96px;
+  padding: 32px 20px 56px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -9,11 +9,10 @@
 
 .page-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
   margin-bottom: 8px;
 }
-.page-header img { flex: none; border-radius: 10px; margin-top: 2px; }
 .page-header p { margin-top: 4px; max-width: 56ch; }
 
 .section-head {
@@ -23,6 +22,7 @@
   margin-bottom: 16px;
 }
 .card > h2 { margin-bottom: 16px; }
+.card h2 { display: flex; align-items: center; gap: 10px; }
 
 /* One column template shared by the header, the add form and every site row,
    so fields line up vertically. */
@@ -36,9 +36,10 @@
 
 .grid-head {
   padding: 0 2px 6px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -55,8 +56,8 @@
 .site-list { margin-top: 14px; }
 
 .site-row {
-  padding: 10px 0;
-  border-top: 1px solid var(--border);
+  padding: 14px 0 10px;
+  background: var(--dither-ink-50) 0 0 / 4px 4px repeat-x;
 }
 .site-row.enter { animation: row-in var(--base) var(--ease); }
 
@@ -88,15 +89,20 @@
 .site-status .pill { height: 20px; font-size: 11.5px; }
 
 .empty {
-  padding: 28px 0 12px;
-  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 0 16px;
+  background: var(--dither-ink-50) 0 0 / 4px 4px repeat-x;
   text-align: center;
 }
+.empty .orn { letter-spacing: 4px; }
 
 .footnote {
   margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  background: var(--dither-ink-50) 0 0 / 4px 4px repeat-x;
 }
 
 .setting-row {
@@ -122,7 +128,7 @@
   right: 11px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 13px;
+  font-size: 14px;
   pointer-events: none;
 }
 
@@ -134,18 +140,17 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 10px 16px 10px 18px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--text) 92%, transparent);
-  color: var(--bg);
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(16px) saturate(160%);
-  font-size: 14px;
+  padding: 10px 18px 12px;
+  background: var(--peach);
+  color: var(--ink);
+  box-shadow: inset 0 -4px 0 var(--edge);
+  clip-path: var(--notch);
+  font-size: 15px;
   transform: translate(-50%, 0);
   transition: transform var(--base) var(--ease), opacity var(--base) var(--ease);
 }
 .toast[hidden] { display: flex; visibility: hidden; opacity: 0; transform: translate(-50%, 16px); transition: transform var(--base) var(--ease), opacity var(--base) var(--ease), visibility 0s var(--base); }
-.toast .link { color: color-mix(in srgb, var(--accent) 70%, var(--bg)); font-weight: 600; }
+.toast .link { color: var(--plum); font-weight: 700; }
 
 @media (max-width: 680px) {
   .options { padding: 28px 16px 96px; }

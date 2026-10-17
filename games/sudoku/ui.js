@@ -227,9 +227,10 @@ PG_GAMES.sudoku = {
         if (!s.puzzle[i] && s.values[i] && s.values[i] !== s.solution[i]) s.wrong.add(i);
       }
       const left = `${s.checksLeft} check${s.checksLeft === 1 ? "" : "s"} left.`;
-      statusEl.textContent = s.wrong.size
-        ? `${s.wrong.size} wrong number${s.wrong.size === 1 ? "" : "s"} highlighted. ${left}`
-        : `Everything so far is correct. ${left}`;
+      // Yarndings 12 draws "v" as a sad face and "u" as a smiley.
+      statusEl.innerHTML = s.wrong.size
+        ? `<span class="orn" aria-hidden="true">v</span> ${s.wrong.size} wrong number${s.wrong.size === 1 ? "" : "s"}. ${left}`
+        : `<span class="orn" aria-hidden="true">u</span> All correct so far. ${left}`;
       render();
       save();
       for (const i of s.wrong) {
@@ -246,6 +247,7 @@ PG_GAMES.sudoku = {
       if (!E.isSolved(s.values)) return;
       s.solved = true;
       clearInterval(timer);
+      statusEl.textContent = "";
       s.selected = -1;
       render();
       // Let the wave finish (last cell starts at 16 * 28ms) before handing off.

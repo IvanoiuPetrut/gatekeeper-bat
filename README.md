@@ -30,6 +30,10 @@ Games: **Sudoku** (easy / medium / hard / expert). **Chess** is listed as "comin
 | `unlocks`  | `{ [siteId]: expiresAtMs }` |
 | `progress` | `{ [siteId]: { game, difficulty, state } }` |
 
+## Art
+
+The icons, the bat mascot sprite (`lib/bat-hero.png`) and the dithered sky (`lib/dither-sky.png`) are drawn in code using the [PUMKYN4](https://lospec.com/palette-list/pumkyn4) palette. To change them, edit the ASCII sprites in `tools/draw-sprites.py` and run `python3 tools/draw-sprites.py` (requires Pillow).
+
 ## Adding a game (e.g. chess)
 
 1. Create `games/<name>/` with a script that registers:
