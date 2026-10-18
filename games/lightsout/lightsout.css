@@ -1,0 +1,23 @@
+/* Lights Out: dark cells are ink, lit cells are ember panes with a peach glint. */
+.lo-cell { background: var(--ink); }
+.lo-cell.lit { background: var(--ember); }
+.lo-cell.lit::before {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 22%;
+  height: 22%;
+  background: var(--peach);
+}
+/* A flipped cell blinks once, in frames like a sprite. */
+.lo-cell.flip { animation: lo-flip 160ms steps(2, end); }
+@keyframes lo-flip {
+  from { background: var(--plum); }
+}
+.lo-board.solved .lo-cell { animation-name: lo-wave; }
+@keyframes lo-wave {
+  0%, 100% { background: var(--ink); }
+  25%, 75% { background: var(--plum); }
+  50% { background: var(--ember); }
+}

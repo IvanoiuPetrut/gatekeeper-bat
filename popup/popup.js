@@ -15,25 +15,35 @@ async function render() {
   }
 
   if (!site) {
+    // Start from whatever was picked last time.
+    const { popupChoice = {} } = await chrome.storage.local.get("popupChoice");
+    const game = PG.GAMES[popupChoice.game]?.available ? popupChoice.game : "sudoku";
+    const difficulty = PG.DIFFICULTIES.includes(popupChoice.difficulty) ? popupChoice.difficulty : "medium";
     content.innerHTML = `
       <p class="domain"></p>
       <p class="muted">Not guarded.</p>
-      <div class="row">
-        <select id="difficulty" aria-label="Difficulty">
-          ${PG.DIFFICULTIES.map((d) => `<option value="${d}" ${d === "medium" ? "selected" : ""}>${PG.capitalize(d)} sudoku</option>`).join("")}
+      <div class="pick">
+        <select id="game" aria-label="Game">
+          ${Object.entries(PG.GAMES)
+            .filter(([, g]) => g.available)
+            .map(([key, g]) => `<option value="${key}" ${key === game ? "selected" : ""}>${g.label}</option>`)
+            .join("")}
         </select>
-        <button id="guard" class="primary">Guard</button>
+        <div class="row">
+          <select id="difficulty" aria-label="Difficulty">
+            ${PG.DIFFICULTIES.map((d) => `<option value="${d}" ${d === difficulty ? "selected" : ""}>${PG.capitalize(d)}</option>`).join("")}
+          </select>
+          <button id="guard" class="primary">Guard</button>
+        </div>
       </div>`;
     content.querySelector(".domain").textContent = domain;
     document.getElementById("guard").addEventListener("click", async () => {
-      sites.push({
-        id: crypto.randomUUID(),
-        domain,
-        game: "sudoku",
+      const choice = {
+        game: document.getElementById("game").value,
         difficulty: document.getElementById("difficulty").value,
-        minutes: null,
-      });
-      await chrome.storage.local.set({ sites });
+      };
+      sites.push({ id: crypto.randomUUID(), domain, ...choice, minutes: null });
+      await chrome.storage.local.set({ sites, popupChoice: choice });
       window.close();
     });
     return;

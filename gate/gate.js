@@ -57,7 +57,7 @@ async function main() {
   const minutes = PG.minutesFor(site, settings);
   $("domain").textContent = site.domain;
   document.title = `${site.domain} · Gatekeeper Bat`;
-  $("subtitle").textContent = `Solve this ${PG.GAMES[site.game]?.label.toLowerCase() ?? "puzzle"} to unlock it for ${minutes} minutes.`;
+  $("subtitle").textContent = `${PG.GAMES[site.game]?.goal ?? "Solve this puzzle"} to unlock it for ${minutes} minutes.`;
 
   const game = PG_GAMES[site.game];
   if (!game) {
@@ -105,7 +105,7 @@ async function main() {
 function fitBoardToWindow() {
   const gate = document.querySelector(".gate");
   const fit = () => {
-    const board = gate.querySelector(".sudoku-board");
+    const board = gate.querySelector(".sudoku-board, [data-fit]");
     if (!board) return;
     const rest = gate.getBoundingClientRect().height - board.getBoundingClientRect().height;
     gate.style.setProperty("--board-chrome", `${Math.ceil(rest)}px`);

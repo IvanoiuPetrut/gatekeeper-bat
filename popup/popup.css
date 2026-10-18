@@ -40,6 +40,16 @@ body { width: 300px; min-height: 0; background: var(--plum); }
 
 .popup select { flex: 1; }
 
+.popup .pick {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+/* In a column, flex: 1 would squash its height. */
+.popup .pick > select { flex: none; }
+.popup .pick .row { margin-top: 0; }
+
 .popup footer {
   padding-top: 14px;
   background: var(--dither-ink-50) 0 0 / 4px 4px repeat-x;
