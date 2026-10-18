@@ -56,7 +56,7 @@ async function main() {
 
   const minutes = PG.minutesFor(site, settings);
   $("domain").textContent = site.domain;
-  document.title = `${site.domain} · It's Time to Stop`;
+  document.title = `${site.domain} · Gatekeeper Bat`;
   $("subtitle").textContent = `Solve this ${PG.GAMES[site.game]?.label.toLowerCase() ?? "puzzle"} to unlock it for ${minutes} minutes.`;
 
   const game = PG_GAMES[site.game];

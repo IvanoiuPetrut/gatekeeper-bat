@@ -1,4 +1,4 @@
-# It's Time to Stop
+# Gatekeeper Bat
 
 A browser extension that guards distracting websites behind a puzzle. Add a site, choose a game and difficulty, and you'll have to solve a puzzle before the site opens. Once you solve it, the site stays unlocked for a set time (30 minutes by default, or a per-site override). After that you have to solve another one.
 
