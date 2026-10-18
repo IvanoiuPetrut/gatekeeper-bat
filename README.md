@@ -1,4 +1,4 @@
-# It's Time to Stop
+# Gatekeeper Bat
 
 A browser extension that guards distracting websites behind a puzzle. Add a site, choose a game and difficulty, and you'll have to solve a puzzle before the site opens. Once you solve it, the site stays unlocked for a set time (30 minutes by default, or a per-site override). After that you have to solve another one.
 
@@ -33,6 +33,10 @@ Games: **Sudoku** (easy / medium / hard / expert). **Chess** is listed as "comin
 ## Art
 
 The icons, the bat mascot sprite (`lib/bat-hero.png`) and the dithered sky (`lib/dither-sky.png`) are drawn in code using the [PUMKYN4](https://lospec.com/palette-list/pumkyn4) palette. To change them, edit the ASCII sprites in `tools/draw-sprites.py` and run `python3 tools/draw-sprites.py` (requires Pillow).
+
+## Fonts
+
+Fonts are bundled in `lib/fonts/` (no network requests): [Silkscreen](https://fonts.google.com/specimen/Silkscreen) for pixel mode, [Montserrat](https://fonts.google.com/specimen/Montserrat) for plain mode (Settings → Font), and [Yarndings 12](https://fonts.google.com/specimen/Yarndings+12) for decorative flowers. All are under the SIL Open Font License; the license texts are next to the font files.
 
 ## Adding a game (e.g. chess)
 

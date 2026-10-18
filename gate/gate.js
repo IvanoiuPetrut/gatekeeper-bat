@@ -56,7 +56,7 @@ async function main() {
 
   const minutes = PG.minutesFor(site, settings);
   $("domain").textContent = site.domain;
-  document.title = `${site.domain} · It's Time to Stop`;
+  document.title = `${site.domain} · Gatekeeper Bat`;
   $("subtitle").textContent = `Solve this ${PG.GAMES[site.game]?.label.toLowerCase() ?? "puzzle"} to unlock it for ${minutes} minutes.`;
 
   const game = PG_GAMES[site.game];
@@ -89,6 +89,7 @@ async function main() {
   });
 
   $("continue").addEventListener("click", proceed);
+  fitBoardToWindow();
 
   // If the site gets unlocked or unguarded elsewhere, stop blocking this tab.
   chrome.storage.onChanged.addListener(async (changes, area) => {
@@ -97,6 +98,21 @@ async function main() {
     const current = state.sites.find((s) => s.id === siteId);
     if (!current || PG.isUnlocked(current, state.unlocks)) proceed();
   });
+}
+
+// The board gets whatever height the rest of the page leaves, so the page never scrolls
+// at common window sizes. Re-measured when anything resizes (fonts, wrapping titles, window).
+function fitBoardToWindow() {
+  const gate = document.querySelector(".gate");
+  const fit = () => {
+    const board = gate.querySelector(".sudoku-board");
+    if (!board) return;
+    const rest = gate.getBoundingClientRect().height - board.getBoundingClientRect().height;
+    gate.style.setProperty("--board-chrome", `${Math.ceil(rest)}px`);
+  };
+  new ResizeObserver(fit).observe(gate);
+  addEventListener("resize", fit);
+  document.fonts.ready.then(fit);
 }
 
 main();

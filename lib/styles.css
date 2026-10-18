@@ -29,7 +29,8 @@
   --edge: rgb(6 6 14 / 0.32); /* bottom bevel on buttons */
 
   --control-h: 36px;
-  --font: "Pixelify Sans", ui-monospace, monospace;
+  /* Silkscreen by default; Settings → Font switches to Montserrat (see lib/font.js). */
+  --font: "Silkscreen", ui-monospace, monospace;
 
   /* Interaction feedback stays smooth; decorative motion moves in frames. */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -39,6 +40,12 @@
 
   color-scheme: dark;
 }
+
+:root[data-font="plain"] { --font: "Montserrat", system-ui, sans-serif; }
+/* Silkscreen's bold is too heavy to read (its 4 turns into a blob) and its letters are wide,
+   so pixel mode uses the regular weight everywhere and a slightly smaller base size. */
+:root[data-font="pixel"] body { font-size: 14px; }
+:root[data-font="pixel"] body * { font-weight: 400 !important; }
 
 * { box-sizing: border-box; }
 

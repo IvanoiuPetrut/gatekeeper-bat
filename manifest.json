@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "It's Time to Stop",
+  "name": "Gatekeeper Bat",
   "version": "1.0.0",
   "description": "Guard distracting websites behind a puzzle. Solve it to get in for a while.",
   "permissions": ["storage", "tabs", "webNavigation", "alarms"],
@@ -28,7 +28,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "its-time-to-stop@petrut",
+      "id": "gatekeeper-bat@petrut",
       "strict_min_version": "121.0",
       "data_collection_permissions": { "required": ["none"] }
     }
