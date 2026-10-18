@@ -1,0 +1,42 @@
+/* Minesweeper: covered squares are raised plum tiles, dug squares are flat ink. */
+.ms-cell {
+  font-size: var(--ms-font);
+  font-weight: 700;
+  background: var(--plum);
+  box-shadow: inset 2px 2px 0 color-mix(in srgb, var(--peach) 30%, var(--plum)), inset -2px -2px 0 var(--edge);
+  border-color: var(--ink);
+}
+.ms-cell.open { background: var(--ink); box-shadow: none; border-color: var(--plum); cursor: default; }
+.ms-cell.open.n1, .ms-cell.open.n2, .ms-cell.open.n3 { cursor: pointer; }
+/* Four colours to work with: numbers step from faded peach to ember as danger rises. */
+.ms-cell.n1 { color: var(--muted); }
+.ms-cell.n2 { color: var(--peach); }
+.ms-cell.n3 { color: var(--ember); }
+
+/* Pixel flag and mine, drawn as 8×8 SVGs so they stay crisp at any board size. */
+.ms-cell.flag::before,
+.ms-cell.misflag::before,
+.ms-cell.mine::before {
+  content: "";
+  width: 62%;
+  height: 62%;
+  background: center / contain no-repeat;
+  image-rendering: pixelated;
+}
+.ms-cell.flag::before,
+.ms-cell.misflag::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath d='M2 1h1v5H2zM1 6h4v1H1z' fill='%23f99e90'/%3E%3Cpath d='M3 1h3v1H3zM3 2h2v1H3zM3 3h1v1H3z' fill='%23d34f0d'/%3E%3C/svg%3E");
+}
+.ms-cell.mine::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath d='M3 0h2v8H3zM0 3h8v2H0zM1 1h6v6H1z' fill='%2306060e'/%3E%3Cpath d='M2 2h2v1H2zM2 3h1v1H2z' fill='%23f99e90'/%3E%3C/svg%3E");
+}
+.ms-cell.mine { background: color-mix(in srgb, var(--plum) 60%, var(--peach)); box-shadow: none; }
+.ms-cell.boom { background: var(--ember); }
+/* A flag that was on a safe square, shown after a loss: crossed out. */
+.ms-cell.misflag::after {
+  content: "";
+  position: absolute;
+  inset: 20%;
+  background: linear-gradient(45deg, transparent 44%, var(--ember) 44% 56%, transparent 56%),
+    linear-gradient(-45deg, transparent 44%, var(--ember) 44% 56%, transparent 56%);
+}

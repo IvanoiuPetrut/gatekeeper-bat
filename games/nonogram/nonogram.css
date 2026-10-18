@@ -1,0 +1,63 @@
+/* Nonogram: column clues above, row clues to the left, grid in the usual frame.
+   The whole puzzle is a square; --n is the grid size, --depth the room left for clues. */
+.ng-puzzle {
+  display: grid;
+  aspect-ratio: 1;
+  container-type: inline-size;
+  /* One "unit" is a grid square; clue numbers are sized from it. */
+  --unit: calc(100cqi / (var(--n) + var(--depth)));
+  user-select: none;
+}
+
+.ng-cols,
+.ng-rows {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  font-size: max(11px, calc(var(--unit) * 0.64));
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.ng-cols { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); padding-bottom: 10px; }
+.ng-rows { grid-template-rows: repeat(var(--n), minmax(0, 1fr)); padding-right: 10px; }
+
+.ng-clue {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(var(--unit) * 0.2);
+  min-width: 0;
+  min-height: 0;
+  color: var(--peach);
+}
+.ng-clue.col { flex-direction: column; padding-bottom: 2px; }
+.ng-clue.row { padding-right: 4px; }
+/* The cursor's row and column clues light up; finished lines fade back. */
+.ng-clue.active { background: color-mix(in srgb, var(--plum) 55%, transparent); }
+.ng-clue.done { color: color-mix(in srgb, var(--peach) 40%, var(--plum)); }
+
+.ng-grid { touch-action: none; }
+
+.ng-cell { background: var(--ink); }
+.ng-cell.guide-col { border-right: 3px solid var(--plum); }
+.ng-cell.guide-row { border-bottom: 3px solid var(--plum); }
+.ng-cell.peer { background: color-mix(in srgb, var(--plum) 35%, var(--ink)); }
+.ng-cell.filled { background: var(--peach); }
+.ng-cell.crossed::before,
+.ng-cell.crossed::after {
+  content: "";
+  position: absolute;
+  inset: 30% 46%;
+  background: var(--muted);
+  transform: rotate(45deg);
+}
+.ng-cell.crossed::after { transform: rotate(-45deg); }
+.ng-cell.wrong { background: var(--ember); }
+.ng-cell.wrong.crossed::before,
+.ng-cell.wrong.crossed::after { background: var(--ink); }
+
+/* Solved: grid lines go and the picture shows in its own colours. */
+.ng-grid.solved .ng-cell { border-color: transparent; background: var(--ink); }
+.ng-grid.solved .ng-cell[data-color="p"] { background: var(--peach); }
+.ng-grid.solved .ng-cell[data-color="e"] { background: var(--ember); }
+.ng-grid.solved .ng-cell[data-color="u"] { background: color-mix(in srgb, var(--plum) 80%, var(--peach)); }

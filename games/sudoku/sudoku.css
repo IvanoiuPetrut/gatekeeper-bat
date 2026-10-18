@@ -162,18 +162,6 @@
   color: var(--ink);
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 4px 1px;
-  background: var(--ink);
-  color: var(--peach);
-  font-size: 13px;
-}
-
 .sudoku-status {
   display: flex;
   align-items: center;

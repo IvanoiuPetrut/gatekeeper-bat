@@ -2,7 +2,14 @@
 
 A browser extension that guards distracting websites behind a puzzle. Add a site, choose a game and difficulty, and you'll have to solve a puzzle before the site opens. Once you solve it, the site stays unlocked for a set time (30 minutes by default, or a per-site override). After that you have to solve another one.
 
-Games: **Sudoku** (easy / medium / hard / expert). **Chess** is listed as "coming soon".
+Games, each with easy / medium / hard / expert:
+
+- **Sudoku**: every puzzle has a single solution.
+- **Nonogram**: fill the grid to match the number clues, and a pixel picture appears. Puzzles are either hand-drawn pictures (`games/nonogram/pictures.js`) or random mirrored critters. Every one can be solved line by line, without guessing.
+- **Minesweeper**: your first click always opens an area, and every board can be cleared by logic alone.
+- **Lights Out**: clicking a light flips it and its neighbours. Turn them all off.
+
+**Chess** is listed as "coming soon".
 
 ## Install (development)
 
@@ -38,6 +45,10 @@ The icons, the bat mascot sprite (`lib/bat-hero.png`) and the dithered sky (`lib
 
 Fonts are bundled in `lib/fonts/` (no network requests): [Silkscreen](https://fonts.google.com/specimen/Silkscreen) for pixel mode, [Montserrat](https://fonts.google.com/specimen/Montserrat) for plain mode (Settings → Font), and [Yarndings 12](https://fonts.google.com/specimen/Yarndings+12) for decorative flowers. All are under the SIL Open Font License; the license texts are next to the font files.
 
+## Nonogram pictures
+
+Pictures are ASCII art in `games/nonogram/pictures.js` (`.` empty, `p` peach, `e` ember, `u` plum). After adding or editing one, run `node tools/check-nonograms.js`. It flags any picture that can't be solved without guessing.
+
 ## Adding a game (e.g. chess)
 
 1. Create `games/<name>/` with a script that registers:
@@ -49,8 +60,9 @@ Fonts are bundled in `lib/fonts/` (no network requests): [Silkscreen](https://fo
      },
    };
    ```
+   `games/shared.js` has helpers for timers, arrow-key movement, building a grid and confirm buttons, and `games/shared.css` has the board frame, tool buttons and status line. Give the board element `data-fit` so the gate sizes it to the window.
 2. Include its script/CSS in `gate/gate.html`.
-3. Set `available: true` for it in `PG.GAMES` in `lib/common.js`.
+3. Set `available: true` for it in `PG.GAMES` in `lib/common.js`, with a `label` and a `goal` (the start of the gate's subtitle, e.g. "Clear this minefield").
 
 ## License
 
