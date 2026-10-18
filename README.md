@@ -47,3 +47,7 @@ The icons, the bat mascot sprite (`lib/bat-hero.png`) and the dithered sky (`lib
    ```
 2. Include its script/CSS in `gate/gate.html`.
 3. Set `available: true` for it in `PG.GAMES` in `lib/common.js`.
+
+## License
+
+Free to use, copy, modify and share for any purpose. You just can't sell it or charge for it, and that includes modified versions. See [LICENSE](LICENSE) for the full terms. Bundled fonts keep their own SIL Open Font License.
